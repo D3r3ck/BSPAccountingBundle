@@ -11,7 +11,7 @@ use BSP\AccountingBundle\Model\FinancialTransaction as BaseFinancialTransaction;
 class FinancialTransaction extends BaseFinancialTransaction
 {
     /**
-     * @MongoDB\Id
+     * @MongoDB\Id(strategy="INCREMENT")
      */
     protected $id;
 

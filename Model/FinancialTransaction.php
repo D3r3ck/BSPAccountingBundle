@@ -3,8 +3,6 @@
 namespace BSP\AccountingBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use BSP\AccountingBundle\Model\FinancialTransactionInterface;
-use BSP\AccountingBundle\Model\ExtendedDataInterface;
 
 class FinancialTransaction implements FinancialTransactionInterface
 {
@@ -19,8 +17,8 @@ class FinancialTransaction implements FinancialTransactionInterface
     public function __construct()
     {
         $this->accountingEntries = new ArrayCollection();
-        $this->state = self::STATE_NEW;
-        $this->createdAt = new \DateTime();
+        $this->state             = self::STATE_NEW;
+        $this->createdAt         = new \DateTime();
     }
 
     public function getId()
@@ -30,7 +28,7 @@ class FinancialTransaction implements FinancialTransactionInterface
 
     public function isOpen()
     {
-        return ($this->getState() == self::STATE_NEW || $this->getState() == self::STATE_PENDING );
+        return ($this->getState() == self::STATE_NEW || $this->getState() == self::STATE_PENDING);
     }
 
     public function getState()
@@ -38,15 +36,15 @@ class FinancialTransaction implements FinancialTransactionInterface
         return $this->state;
     }
 
-    public function setState( $state )
+    public function setState($state)
     {
         $this->state = $state;
     }
 
-    public function close( $success )
+    public function close($success)
     {
         $this->checkStatus();
-        $this->state = $success? self::STATE_SUCCESS : self::STATE_FAILED;
+        $this->state = $success ? self::STATE_SUCCESS : self::STATE_FAILED;
     }
 
     public function cancel()
@@ -60,7 +58,7 @@ class FinancialTransaction implements FinancialTransactionInterface
         return $this->reference;
     }
 
-    public function setReference( $reference )
+    public function setReference($reference)
     {
         $this->reference = $reference;
     }
@@ -70,7 +68,7 @@ class FinancialTransaction implements FinancialTransactionInterface
         return $this->createdAt;
     }
 
-    public function setCreatedAt( $createdAt )
+    public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
     }
@@ -80,7 +78,7 @@ class FinancialTransaction implements FinancialTransactionInterface
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt( $updatedAt )
+    public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }
@@ -90,12 +88,12 @@ class FinancialTransaction implements FinancialTransactionInterface
         return $this->accountingEntries;
     }
 
-    public function setAccountingEntries( $entries )
+    public function setAccountingEntries($entries)
     {
         $this->accountingEntries = $entries;
     }
 
-    public function addAcountingEntry( $accountingEntry )
+    public function addAcountingEntry($accountingEntry)
     {
         $this->checkStatus();
         $this->accountingEntries[] = $accountingEntry;
@@ -112,15 +110,21 @@ class FinancialTransaction implements FinancialTransactionInterface
         $this->extendedData = $extendedData;
     }
 
+    /**
+     *
+     */
     public function incrementUpdatedAt()
     {
         $this->updatedAt = new \DateTime();
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function checkStatus()
     {
-        if ( ! ($this->state == self::STATE_NEW) ) {
-            Throw new \Exception( 'This transaction is not new, you can\'t edit' );
+        if (!($this->state == self::STATE_NEW || $this->state == self::STATE_PENDING)) {
+            Throw new \Exception('This transaction is not new, you can\'t edit');
         }
     }
 }

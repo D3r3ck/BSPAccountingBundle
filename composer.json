@@ -1,5 +1,5 @@
 {
-    "name": "d3r3ck/bsp-accounting-bundle",
+    "name": "SalmaAbdelhady/bsp-accounting-bundle",
     "type": "symfony-bundle",
     "description": "Double-entry accounting bundle for Symfony2",
     "keywords": ["accounting", "double-entry", "symfony2", "bundle", "bsp"],

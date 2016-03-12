@@ -35,7 +35,7 @@ class LoadAccountsCommand extends ContainerAwareCommand
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $filename = $this->getContainer()->parameters['bsp_accounting.system_accounts'];
+        $filename = $this->getContainer()->getParameter('bsp_accounting.system_accounts');
         $manipulator = $this->getContainer()->get('bsp_accounting.manipulator');
         $loader = Yaml::parse($filename);
         $accounts = array();
