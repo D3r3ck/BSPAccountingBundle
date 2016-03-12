@@ -45,7 +45,7 @@ class FinancialTransaction extends BaseFinancialTransaction
     protected $accountingEntries;
 
     /**
-     * @MongoDB\Hash
+     * @ORM\Column(name="extended_data",type="array")
      */
     protected $extendedData;
 
