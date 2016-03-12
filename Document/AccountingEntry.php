@@ -2,8 +2,9 @@
 
 namespace BSP\AccountingBundle\Document;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use BSP\AccountingBundle\Model\AccountingEntry as BaseAccountingEntry;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Gedmo\Mapping\Annotation\Timestampable;
 
 /**
  * @MongoDB\EmbeddedDocument
@@ -11,7 +12,7 @@ use BSP\AccountingBundle\Model\AccountingEntry as BaseAccountingEntry;
 class AccountingEntry extends BaseAccountingEntry
 {
     /**
-     * @MongoDB\ReferenceOne(targetDocument="BSP\AccountingBundle\Document\Account")
+     * @MongoDB\ReferenceOne(targetDocument="BSP\AccountingBundle\Document\Account",simple=true)
      */
     protected $account;
 
@@ -42,13 +43,8 @@ class AccountingEntry extends BaseAccountingEntry
 
     /**
      * @MongoDB\Date
+     * @Timestampable(on="create")
      */
     protected $createdAt;
-
-    /** @MongoDB\PrePersist */
-    public function prePersistEntry()
-    {
-        parent::setCreatedAt();
-    }
 
 }

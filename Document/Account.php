@@ -11,7 +11,7 @@ use BSP\AccountingBundle\Model\Account as BaseAccount;
 class Account extends BaseAccount
 {
     /**
-     * @MongoDB\Id(strategy="none")
+     * @MongoDB\Id(strategy="INCREMENT")
      */
     protected $id;
 
