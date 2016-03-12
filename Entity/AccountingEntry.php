@@ -13,8 +13,8 @@ use BSP\AccountingBundle\Model\AccountingEntry as BaseAccountingEntry;
 class AccountingEntry extends BaseAccountingEntry
 {
     /**
-     * @ManyToOne(targetEntity="BSP\AccountingBundle\Entity\Account")
-     * @JoinColumn(name="account_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="BSP\AccountingBundle\Entity\Account")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id")
      */
     protected $account;
 
